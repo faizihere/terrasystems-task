@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Terra Systems</title>
+  <!-- CDN -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <!-- CSS FILES -->
+  <link rel="stylesheet" href="{% static 'css/login-styles.css' %}">
+</head>
+<body>
+
+      <!-- LOGIN FORM - DYNAMICALLY RENDERED INPUTS -->
+  <div class="login-container">
+    <h2>Login</h2>
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          {{ field.label_tag }}
+          {{ field }}
+          {% if field.errors %}
+            <p class="form-error">{{ field.errors.0 }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <!-- USER REGISTERATION LINK -->
+    <div class="bottom-text">
+        Already have an account? <a href="/register">Register</a><br />
+        <a href="/">← Back to Home</a>
+      </div>
+  </div>
+
+
+
+</body>
+</html>

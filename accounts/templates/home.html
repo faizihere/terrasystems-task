@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>TERRASYSTEMS - TASK</title>
+    
+    <!-- CDN'S -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    
+    <!-- CSS FILES -->
+    <link rel="stylesheet" href="{% static 'css/other-section-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cards-section-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/footer-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hero-section-styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav-styles.css' %}">
+    </head>
+      
+
+  <body>
+  
+  <!-- NAVBAR-->
+  <header class="header">
+      <i class='bx bx-menu' id="menu-icon"></i>
+      <nav class="navbar">
+          <a href="#">Home</a>
+          <a href="#feature-section">Features</a>
+          <a href="#pricing-section">Pricing</a>
+          <a href="register">Register</a>
+          <a href="login">Login</a>
+      </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <div class="hero">
+    <canvas id="particleCanvas"></canvas>
+    <!-- Canvas for animated background -->
+    <div class="content">
+      <h1 class="title">{{ content.title }}</h1>
+      <p class="subtitle">{{ content.subtitle }}</p>
+      <button class="cta-button">Explore More</button>
+    </div>
+  </div>
+
+
+  <!-- FEATURES SECTION -->
+  <section id="feature-section" class="feature-section">
+    <div class="feature-container">
+      <div class="feature-text">
+        <h2 class="feature-title">{{ content.feature_title }}</h2>
+        <p class="feature-description">
+          {{ content.feature_description }}
+        </p>
+        <button class="cta-button">Explore More</button>
+      </div>
+      <div class="feature-image">
+        <img src="{% static 'images/dm.jpeg' %}" alt="Design" />
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PRICING SECTION -->
+  <section id="pricing-section" class="pricing-section">
+      <h2 class="pricing-title">Choose Your Plan</h2>
+      <div class="pricing-cards">
+        {% for plan in plans %}
+        <div class="pricing-card">
+          <h3 class="plan-name">{{ plan.title }}</h3>
+          <p class="plan-price">${{ plan.price }}</p>
+          <ul class="plan-features">
+            {% for feature in plan.features_list %}
+              <li>{{ feature.strip }}</li>
+            {% endfor %}
+          </ul>
+          <button class="cta-button">Get Started</button>
+        </div>
+        {% endfor %}
+      </div>
+  </section>
+  
+  <!-- PRICING SECTIONS -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <h2 class="footer-logo">{{ content.title }}</h2>
+        <p class="footer-tagline">{{ content.subtitle }}</p>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <p>Email: {{ content.contact_email }}</p>
+        <p>Phone: {{ content.contact_phone }}</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 DESIGNED BY NOORFAISAL.</p>
+    </div>
+  </footer>
+
+  </body>
+</html>
+
+<!-- HERO AND NAVBAR JS FILES -->
+<script src="{% static 'js/nav-script.js' %}"></script>
+<script src="{% static 'js/hero-anime.js' %}"></script>

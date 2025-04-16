@@ -1,0 +1,74 @@
+<!-- TO MODIFY THE CONTENTS OF THE HOME PAGE DYNAMICALLY -->
+{% extends 'base_dashboard.html' %}
+{% block title %}Edit Homepage Content{% endblock %}
+{% block content %}
+  <!-- Main Content -->
+  <div class="flex-1 p-6">
+    <h1 class="text-2xl font-bold mb-4">Edit Home Page</h1>
+    
+    <form method="POST" class="mx-auto">
+      {% csrf_token %}
+      
+      <!-- Hero Section -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
+        <div>
+          <label for="id_title" class="block text-gray-300 text-lg font-medium">Title</label>
+          {{ form.title }}
+        </div>
+        <div>
+          <label for="id_subtitle" class="block text-gray-300 text-lg font-medium">Subtitle</label>
+          {{ form.subtitle }}
+        </div>
+        <div>
+          <label for="id_cta_button" class="block text-gray-300 text-lg font-medium">CTA Button Text</label>
+          {{ form.cta_button }}
+        </div>
+      </div>
+
+      <!-- Feature Section -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
+        <div>
+          <label for="id_feature_title" class="block text-gray-300 text-lg font-medium">Feature Title</label>
+          {{ form.feature_title }}
+        </div>
+        <div>
+          <label for="id_feature_description" class="block text-gray-300 text-lg font-medium">Feature Description</label>
+          {{ form.feature_description }}
+        </div>
+        <div>
+          <label for="id_feature_button" class="block text-gray-300 text-lg font-medium">Feature Button Text</label>
+          {{ form.feature_button }}
+        </div>
+      </div>
+
+      <!-- Footer Section -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
+        <div>
+          <label for="id_footer_tagline" class="block text-gray-300 text-lg font-medium">Footer Tagline</label>
+          {{ form.footer_tagline }}
+        </div>
+        <div>
+          <label for="id_contact_email" class="block text-gray-300 text-lg font-medium">Contact Email</label>
+          {{ form.contact_email }}
+        </div>
+        <div>
+          <label for="id_contact_phone" class="block text-gray-300 text-lg font-medium">Contact Phone</label>
+          {{ form.contact_phone }}
+        </div>
+      </div>
+      <button type="submit" class="w-full sm:w-auto bg-white bg-opacity-10 backdrop-blur-lg text-white py-2 px-4 rounded-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 hover:bg-opacity-20 transition-all duration-300 ease-in-out transform hover:scale-105 glow-effect">
+        Save Changes
+      </button>
+    </form>
+    <!-- Response Text -->
+    {% if messages %}
+    <div class="fixed top-4 right-4 z-50">
+      {% for message in messages %}
+        <div class="bg-green-500 text-white px-6 py-4 mb-4 rounded-lg shadow-lg text-sm transition-all duration-300 ease-in-out opacity-90 hover:opacity-100">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+{% endblock %}

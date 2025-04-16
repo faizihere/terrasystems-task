@@ -1,0 +1,81 @@
+<!-- templates/base_dashboard.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{% block title %}Admin Dashboard{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    .sidebar-expanded { width: 200px; }
+    .sidebar-collapsed { width: 60px; }
+    .transition-all { transition: all 0.3s ease-in-out; }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans flex">
+
+  <!-- Sidebar -->
+  <div id="sidebar" class="sidebar-collapsed h-screen bg-gray-800 transition-all flex flex-col">
+    <button onclick="toggleSidebar()" class="p-4 focus:outline-none hover:bg-gray-700">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+
+    <nav class="flex-1 mt-4 space-y-4">
+      <a href="{% url 'dashboard' %}" class="flex items-center px-4 py-2 hover:bg-gray-700">
+        <span class="material-icons mr-2">dashboard</span>
+        <span class="sidebar-text hidden">Dashboard</span>
+      </a>
+
+      <a href="{% url 'manage_homepage' %}" class="flex items-center px-4 py-2 hover:bg-gray-700">
+        <span class="material-icons mr-2">edit</span>
+        <span class="sidebar-text hidden">Edit Home</span>
+      </a>
+
+      <a href="{% url 'pricing_plans' %}" class="flex items-center px-4 py-2 hover:bg-gray-700">
+        <span class="material-icons mr-2">attach_money</span>
+        <span class="sidebar-text hidden">Pricing Plans</span>
+      </a>
+      
+      <!-- Logout -->
+      <a href="{% url 'home' %}" class="flex items-center px-4 py-2 hover:bg-gray-700">
+        <span class="material-icons mr-2">home</span>
+        <span class="sidebar-text hidden">Home</span>
+      </a>
+              
+        <!-- Logout -->
+      <a href="{% url 'logout' %}" class="flex items-center px-4 py-2 hover:bg-gray-700">
+        <span class="material-icons mr-2">logout</span>
+        <span class="sidebar-text hidden">Logout</span>
+      </a>
+      
+    </nav>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-6">
+    {% block content %}
+    <!-- Page-specific content goes here -->
+    {% endblock %}
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const textElements = document.querySelectorAll('.sidebar-text');
+
+    function toggleSidebar() {
+      const isCollapsed = sidebar.classList.contains('sidebar-collapsed');
+      sidebar.classList.toggle('sidebar-collapsed', !isCollapsed);
+      sidebar.classList.toggle('sidebar-expanded', isCollapsed);
+
+      textElements.forEach(el => {
+        el.classList.toggle('hidden', !isCollapsed);
+      });
+    }
+  </script>
+
+</body>
+</html>
